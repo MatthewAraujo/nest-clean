@@ -18,6 +18,8 @@ const createAccountBodySchema = z.object({
   password: z.string()
 })
 
+type createAccountBodySchema = z.infer<typeof createAccountBodySchema>
+
 @Controller('/accounts')
 export class CreateAccountController {
   constructor(private prisma: PrismaService) { }
@@ -25,7 +27,7 @@ export class CreateAccountController {
   @Post()
   @HttpCode(201)
   @UsePipes(new ZodValidationPipe(createAccountBodySchema))
-  async handle(@Body() body: any) {
+  async handle(@Body() body: createAccountBodySchema) {
     const { name, email, password } = createAccountBodySchema.parse(body)
 
 
