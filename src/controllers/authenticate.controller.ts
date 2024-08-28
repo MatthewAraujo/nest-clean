@@ -1,8 +1,6 @@
 import {
   Body,
-  ConflictException,
   Controller,
-  HttpCode,
   Post,
   UnauthorizedException,
   UsePipes,
@@ -55,7 +53,7 @@ export class AuthenticateController {
 
 
     return {
-      acces_token: accessToken
+      access_token: accessToken
     }
   }
 }
