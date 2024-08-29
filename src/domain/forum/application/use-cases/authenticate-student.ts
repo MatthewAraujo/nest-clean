@@ -23,7 +23,7 @@ export class AuthenticateStudentUseCase {
     private studentsRepository: StudentsRepository,
     private hashComparer: HasherCompare,
     private encrypter: Encrypter,
-  ) { }
+  ) {}
 
   async execute({
     email,

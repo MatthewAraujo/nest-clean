@@ -25,4 +25,4 @@ import { DatabaseModule } from '../database/database.module'
     AuthenticateStudentUseCase,
   ],
 })
-export class HttpModule { }
+export class HttpModule {}
