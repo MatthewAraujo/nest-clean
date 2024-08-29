@@ -1,11 +1,10 @@
-import { AppModule } from "@/app.module"
-import { PrismaService } from "@/prisma/prisma.service"
-import { INestApplication } from "@nestjs/common"
+import { AppModule } from '@/app.module'
+import { PrismaService } from '@/prisma/prisma.service'
+import { INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
-import request from "supertest"
+import request from 'supertest'
 
 describe('Create Account (E2E)', () => {
-
   let app: INestApplication
   let prisma: PrismaService
 
@@ -38,5 +37,4 @@ describe('Create Account (E2E)', () => {
 
     expect(userOnDatabase).toBeTruthy()
   })
-
 })
