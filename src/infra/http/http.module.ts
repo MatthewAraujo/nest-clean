@@ -17,4 +17,4 @@ import { FetchRecentQuestionController } from './controllers/fetch-recent-questi
   ],
   providers: [CreateQuestionUseCase, FetchRecentQuestionsUseCase],
 })
-export class HttpModule { }
+export class HttpModule {}

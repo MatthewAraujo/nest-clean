@@ -16,7 +16,7 @@ type FetchRecentQuestionsUseCaseResponse = Either<
 
 @Injectable()
 export class FetchRecentQuestionsUseCase {
-  constructor(private questionsRepository: QuestionsRepository) { }
+  constructor(private questionsRepository: QuestionsRepository) {}
 
   async execute({
     page,
