@@ -16,4 +16,4 @@ import { EnvModule } from './env/env.module'
     EnvModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
