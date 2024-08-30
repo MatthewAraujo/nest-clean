@@ -5,6 +5,7 @@ import { Either, left, right } from '@/core/either'
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
 import { QuestionAttachmentList } from '@/domain/forum/enterprise/entities/question-attachment-list'
 import { Injectable } from '@nestjs/common'
+import { QuestionWithSameTitleError } from '@/core/errors/errors/question-with-same-title-error'
 
 interface CreateQuestionUseCaseRequest {
   authorId: string
@@ -14,7 +15,7 @@ interface CreateQuestionUseCaseRequest {
 }
 
 type CreateQuestionUseCaseResponse = Either<
-  null,
+  QuestionWithSameTitleError,
   {
     question: Question
   }
@@ -31,10 +32,10 @@ export class CreateQuestionUseCase {
     attachmentsIds,
   }: CreateQuestionUseCaseRequest): Promise<CreateQuestionUseCaseResponse> {
     const questionWithSameTitleExists =
-      this.questionsRepository.findByTitle(title)
+      await this.questionsRepository.findByTitle(title)
 
-    if (!questionWithSameTitleExists) {
-      return left(null)
+    if (questionWithSameTitleExists) {
+      return left(new QuestionWithSameTitleError())
     }
 
     const question = Question.create({
