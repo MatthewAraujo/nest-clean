@@ -30,4 +30,4 @@ import { FetchRecentQuestionsController } from './controllers/fetch-recent-quest
     GetQuestionBySlugUseCase,
   ],
 })
-export class HttpModule { }
+export class HttpModule {}

@@ -7,8 +7,9 @@ import { PrismaAnswerCommentMapper } from '../mappers/prisma-answer-comment-mapp
 
 @Injectable()
 export class PrismaAnswerCommentsRepository
-  implements AnswerCommentsRepository {
-  constructor(private prisma: PrismaService) { }
+  implements AnswerCommentsRepository
+{
+  constructor(private prisma: PrismaService) {}
 
   async findById(id: string): Promise<AnswerComment | null> {
     const answerComment = await this.prisma.comment.findUnique({

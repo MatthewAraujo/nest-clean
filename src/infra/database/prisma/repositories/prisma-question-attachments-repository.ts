@@ -6,8 +6,9 @@ import { PrismaQuestionAttachmentMapper } from '../mappers/prisma-question-attac
 
 @Injectable()
 export class PrismaQuestionAttachmentsRepository
-  implements QuestionAttachmentsRepository {
-  constructor(private prisma: PrismaService) { }
+  implements QuestionAttachmentsRepository
+{
+  constructor(private prisma: PrismaService) {}
 
   async findManyByQuestionId(
     questionId: string,
