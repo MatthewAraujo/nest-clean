@@ -9,11 +9,11 @@ import { PrismaAnswerAttachmentsRepository } from './prisma/repositories/prisma-
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
 import { PrismaStudentsRepository } from './prisma/repositories/prisma-students-repository'
+import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository'
+import { AnswerCommentsRepository } from '@/domain/forum/application/repositories/answer-comments-repository'
 import { AnswersRepository } from '@/domain/forum/application/repositories/answers-repository'
 import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments-repository'
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
-import { AnswerCommentsRepository } from '@/domain/forum/application/repositories/answer-comments-repository'
-import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository'
 
 @Module({
   providers: [
@@ -39,7 +39,7 @@ import { AnswerAttachmentsRepository } from '@/domain/forum/application/reposito
       useClass: PrismaAnswersRepository,
     },
     {
-      provide: PrismaAnswerCommentsRepository,
+      provide: AnswerCommentsRepository,
       useClass: PrismaAnswerCommentsRepository,
     },
     {
