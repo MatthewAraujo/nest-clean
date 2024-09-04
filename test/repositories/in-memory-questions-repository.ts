@@ -8,16 +8,10 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
 
   constructor(
     private questionAttachmentsRepository: QuestionAttachmentsRepository,
-  ) {}
+  ) { }
 
-  findByTitle(title: string) {
-    const question = this.items.find((item) => item.title.toString() === title)
-
-    if (!question) {
-      return null
-    }
-
-    return question
+  findByTitle(title: string): Promise<Question | null> {
+    throw new Error('Method not implemented.')
   }
 
   async findById(id: string) {
