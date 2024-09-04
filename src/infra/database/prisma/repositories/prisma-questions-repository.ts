@@ -7,7 +7,7 @@ import { PrismaQuestionMapper } from '../mappers/prisma-question-mapper'
 
 @Injectable()
 export class PrismaQuestionsRepository implements QuestionsRepository {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findById(id: string): Promise<Question | null> {
     const question = await this.prisma.question.findUnique({
@@ -47,20 +47,6 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     })
 
     return questions.map(PrismaQuestionMapper.toDomain)
-  }
-
-  async findByTitle(title: string): Promise<boolean> {
-    const question = await this.prisma.question.findFirst({
-      where: {
-        title,
-      },
-    })
-
-    if (!question) {
-      return false
-    }
-
-    return true
   }
 
   async create(question: Question): Promise<void> {
