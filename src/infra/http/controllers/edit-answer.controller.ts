@@ -23,7 +23,7 @@ type EditAnswerBodySchema = z.infer<typeof editAnswerBodySchema>
 
 @Controller('/answers/:id')
 export class EditAnswerController {
-  constructor(private editAnswer: EditAnswerUseCase) { }
+  constructor(private editAnswer: EditAnswerUseCase) {}
 
   @Put()
   @HttpCode(204)

@@ -1,54 +1,54 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { AnswerQuestionUseCase } from '@/domain/forum/application/use-cases/answer-question'
-import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
-import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
+import { CreateQuestionUseCase } from './create-question'
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
+import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository'
 
-let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
-let inMemoryAnswersRepository: InMemoryAnswersRepository
-let sut: AnswerQuestionUseCase
+let inMemoryQuestionsRepository: InMemoryQuestionsRepository
+let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
+let sut: CreateQuestionUseCase
 
-describe('Create Answer', () => {
+describe('Create Question', () => {
   beforeEach(() => {
-    inMemoryAnswerAttachmentsRepository =
-      new InMemoryAnswerAttachmentsRepository()
-    inMemoryAnswersRepository = new InMemoryAnswersRepository(
-      inMemoryAnswerAttachmentsRepository,
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository()
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionAttachmentsRepository,
     )
-    sut = new AnswerQuestionUseCase(inMemoryAnswersRepository)
+    sut = new CreateQuestionUseCase(inMemoryQuestionsRepository)
   })
 
-  it('should be able to create a answer', async () => {
+  it('should be able to create a question', async () => {
     const result = await sut.execute({
-      questionId: '1',
       authorId: '1',
-      content: 'Conteúdo da resposta',
+      title: 'Nova pergunta',
+      content: 'Conteúdo da pergunta',
       attachmentsIds: ['1', '2'],
     })
 
     expect(result.isRight()).toBe(true)
-    expect(inMemoryAnswersRepository.items[0]).toEqual(result.value?.answer)
+    expect(inMemoryQuestionsRepository.items[0]).toEqual(result.value?.question)
     expect(
-      inMemoryAnswersRepository.items[0].attachments.currentItems,
+      inMemoryQuestionsRepository.items[0].attachments.currentItems,
     ).toHaveLength(2)
-    expect(inMemoryAnswersRepository.items[0].attachments.currentItems).toEqual(
-      [
-        expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
-        expect.objectContaining({ attachmentId: new UniqueEntityID('2') }),
-      ],
-    )
+    expect(
+      inMemoryQuestionsRepository.items[0].attachments.currentItems,
+    ).toEqual([
+      expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
+      expect.objectContaining({ attachmentId: new UniqueEntityID('2') }),
+    ])
   })
 
-  it('should persist attachments when creating a new answer', async () => {
+  it('should persist attachments when creating a new question', async () => {
     const result = await sut.execute({
-      questionId: '1',
       authorId: '1',
-      content: 'Conteúdo da resposta',
+      title: 'Nova pergunta',
+      content: 'Conteúdo da pergunta',
       attachmentsIds: ['1', '2'],
     })
 
     expect(result.isRight()).toBe(true)
-    expect(inMemoryAnswerAttachmentsRepository.items).toHaveLength(2)
-    expect(inMemoryAnswerAttachmentsRepository.items).toEqual(
+    expect(inMemoryQuestionAttachmentsRepository.items).toHaveLength(2)
+    expect(inMemoryQuestionAttachmentsRepository.items).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           attachmentId: new UniqueEntityID('1'),

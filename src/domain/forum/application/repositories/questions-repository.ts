@@ -5,7 +5,6 @@ export abstract class QuestionsRepository {
   abstract findById(id: string): Promise<Question | null>
   abstract findBySlug(slug: string): Promise<Question | null>
   abstract findManyRecent(params: PaginationParams): Promise<Question[]>
-  abstract findByTitle(title: string): Promise<Question | null>
   abstract save(question: Question): Promise<void>
   abstract create(question: Question): Promise<void>
   abstract delete(question: Question): Promise<void>

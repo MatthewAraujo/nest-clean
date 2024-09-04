@@ -22,7 +22,7 @@ type CreateQuestionUseCaseResponse = Either<
 
 @Injectable()
 export class CreateQuestionUseCase {
-  constructor(private questionsRepository: QuestionsRepository) {}
+  constructor(private questionsRepository: QuestionsRepository) { }
 
   async execute({
     authorId,
@@ -30,13 +30,6 @@ export class CreateQuestionUseCase {
     content,
     attachmentsIds,
   }: CreateQuestionUseCaseRequest): Promise<CreateQuestionUseCaseResponse> {
-    const questionWithSameTitleExists =
-      this.questionsRepository.findByTitle(title)
-
-    if (!questionWithSameTitleExists) {
-      return left(null)
-    }
-
     const question = Question.create({
       authorId: new UniqueEntityID(authorId),
       title,

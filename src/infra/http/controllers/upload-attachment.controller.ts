@@ -11,13 +11,12 @@ import {
   UseInterceptors,
 } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
-import { error } from 'node:console'
 
 @Controller('/attachments')
 export class UploadAttachmentsController {
   constructor(
     private uploadAndCreateAttachment: UploadAndCreateAttachmentUseCase,
-  ) { }
+  ) {}
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
@@ -44,7 +43,6 @@ export class UploadAttachmentsController {
 
     if (result.isLeft()) {
       const error = result.value
-      console.log(error)
 
       switch (error.constructor) {
         case InvalidAttachmentTypeError:

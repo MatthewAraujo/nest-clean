@@ -4,7 +4,6 @@ import { InvalidAttachmentTypeError } from './errors/invalid-attachment-type-err
 import { Attachment } from '../../enterprise/entities/attachment'
 import { AttachmentsRepository } from '../repositories/attachments-repository'
 import { Uploader } from '../storage/uploader'
-import { o } from 'vitest/dist/chunks/reporters.C_zwCd4j'
 
 interface UploadAndCreateAttachmentRequest {
   fileName: string
@@ -22,7 +21,7 @@ export class UploadAndCreateAttachmentUseCase {
   constructor(
     private attachmentsRepository: AttachmentsRepository,
     private uploader: Uploader,
-  ) { }
+  ) {}
 
   async execute({
     fileName,
