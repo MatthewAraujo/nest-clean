@@ -25,7 +25,7 @@ export function makeQuestionAttachment(
 
 @Injectable()
 export class QuestionAttachmentFactory {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async makePrismaQuestionAttachment(
     data: Partial<QuestionAttachmentProps> = {},
