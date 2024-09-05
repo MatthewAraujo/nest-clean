@@ -8,6 +8,7 @@ import { Controller, Post, Body, BadRequestException } from '@nestjs/common'
 const createQuestionBodySchema = z.object({
   title: z.string(),
   content: z.string(),
+  attachments: z.array(z.string().uuid()),
 })
 
 const bodyValidattionPipe = new ZodValidationPipe(createQuestionBodySchema)
@@ -16,7 +17,7 @@ type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>
 
 @Controller('/questions')
 export class CreateQuestionController {
-  constructor(private createQuestion: CreateQuestionUseCase) {}
+  constructor(private createQuestion: CreateQuestionUseCase) { }
 
   @Post()
   async handle(
@@ -24,14 +25,14 @@ export class CreateQuestionController {
     body: CreateQuestionBodySchema,
     @CurrentUser() user: UserPayload,
   ) {
-    const { title, content } = body
+    const { title, content, attachments } = body
     const userId = user.sub
 
     const result = await this.createQuestion.execute({
       title,
       content,
       authorId: userId,
-      attachmentsIds: [],
+      attachmentsIds: attachments,
     })
 
     if (result.isLeft()) {
