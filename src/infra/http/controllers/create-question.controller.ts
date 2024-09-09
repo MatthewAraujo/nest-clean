@@ -23,7 +23,7 @@ type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>
 
 @Controller('/questions')
 export class CreateQuestionController {
-  constructor(private createQuestion: CreateQuestionUseCase) {}
+  constructor(private createQuestion: CreateQuestionUseCase) { }
 
   @Post()
   async handle(
@@ -31,8 +31,10 @@ export class CreateQuestionController {
     body: CreateQuestionBodySchema,
     @CurrentUser() user: UserPayload,
   ) {
+    console.log("oi")
     const { title, content } = body
     const userId = user.sub
+
 
     const result = await this.createQuestion.execute({
       title,

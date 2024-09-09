@@ -4,6 +4,7 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
+import { response } from 'express'
 import request from 'supertest'
 import { StudentFactory } from 'test/factories/make-student'
 
@@ -40,6 +41,8 @@ describe('Create question (E2E)', () => {
         title: 'New question',
         content: 'Question content',
       })
+
+    console.log(response)
 
     expect(response.statusCode).toBe(201)
 
