@@ -88,4 +88,4 @@ import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases
     UploadAndCreateAttachmentUseCase,
   ],
 })
-export class HttpModule {}
+export class HttpModule { }
