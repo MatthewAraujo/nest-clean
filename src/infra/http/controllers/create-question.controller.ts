@@ -3,7 +3,14 @@ import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { z } from 'zod'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question'
-import { Controller, Post, Body, BadRequestException } from '@nestjs/common'
+import {
+  Controller,
+  Post,
+  Body,
+  BadRequestException,
+  ConflictException,
+} from '@nestjs/common'
+import { QuestionWithSameTitleError } from '@/core/errors/errors/question-with-same-title-error'
 
 const createQuestionBodySchema = z.object({
   title: z.string(),
@@ -17,7 +24,7 @@ type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>
 
 @Controller('/questions')
 export class CreateQuestionController {
-  constructor(private createQuestion: CreateQuestionUseCase) {}
+  constructor(private createQuestion: CreateQuestionUseCase) { }
 
   @Post()
   async handle(
@@ -25,8 +32,14 @@ export class CreateQuestionController {
     body: CreateQuestionBodySchema,
     @CurrentUser() user: UserPayload,
   ) {
+<<<<<<< HEAD
     const { title, content, attachments } = body
+=======
+    console.log("oi")
+    const { title, content } = body
+>>>>>>> main
     const userId = user.sub
+
 
     const result = await this.createQuestion.execute({
       title,
@@ -36,7 +49,14 @@ export class CreateQuestionController {
     })
 
     if (result.isLeft()) {
-      throw new BadRequestException()
+      const error = result.value
+
+      switch (error.constructor) {
+        case QuestionWithSameTitleError:
+          throw new ConflictException(error.message)
+        default:
+          throw new BadRequestException(error.message)
+      }
     }
   }
 }

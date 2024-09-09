@@ -4,6 +4,7 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { INestApplication } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { Test } from '@nestjs/testing'
+import { response } from 'express'
 import request from 'supertest'
 import { AttachmentFactory } from 'test/factories/make-attachment'
 import { StudentFactory } from 'test/factories/make-student'
@@ -47,6 +48,8 @@ describe('Create question (E2E)', () => {
         content: 'Question content',
         attachments: [attachment1.id.toString(), attachment2.id.toString()],
       })
+
+    console.log(response)
 
     expect(response.statusCode).toBe(201)
 

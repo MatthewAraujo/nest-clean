@@ -5,6 +5,7 @@ import { Either, right } from '@/core/either'
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment'
 import { QuestionAttachmentList } from '@/domain/forum/enterprise/entities/question-attachment-list'
 import { Injectable } from '@nestjs/common'
+import { QuestionWithSameTitleError } from '@/core/errors/errors/question-with-same-title-error'
 
 interface CreateQuestionUseCaseRequest {
   authorId: string
@@ -14,7 +15,7 @@ interface CreateQuestionUseCaseRequest {
 }
 
 type CreateQuestionUseCaseResponse = Either<
-  null,
+  QuestionWithSameTitleError,
   {
     question: Question
   }

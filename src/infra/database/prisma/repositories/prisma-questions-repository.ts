@@ -34,11 +34,11 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
       },
     })
 
-    if (!question) {
+    if (question) {
       return null
     }
 
-    return PrismaQuestionMapper.toDomain(question)
+    return null
   }
 
   async findManyRecent({ page }: PaginationParams): Promise<Question[]> {
@@ -51,20 +51,6 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     })
 
     return questions.map(PrismaQuestionMapper.toDomain)
-  }
-
-  async findByTitle(title: string): Promise<Question | null> {
-    const question = await this.prisma.question.findFirst({
-      where: {
-        title,
-      },
-    })
-
-    if (!question) {
-      return null
-    }
-
-    return PrismaQuestionMapper.toDomain(question)
   }
 
   async create(question: Question): Promise<void> {
