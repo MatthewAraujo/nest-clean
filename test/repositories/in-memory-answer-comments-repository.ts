@@ -3,8 +3,7 @@ import { AnswerCommentsRepository } from '@/domain/forum/application/repositorie
 import { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment'
 
 export class InMemoryAnswerCommentsRepository
-  implements AnswerCommentsRepository
-{
+  implements AnswerCommentsRepository {
   public items: AnswerComment[] = []
 
   async findById(id: string) {

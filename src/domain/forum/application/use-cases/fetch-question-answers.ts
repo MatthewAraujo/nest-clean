@@ -1,7 +1,7 @@
 import { Either, right } from '@/core/either'
 import { AnswersRepository } from '../repositories//answers-repository'
-import { Answer } from '@/domain/forum/enterprise/entities/answer'
 import { Injectable } from '@nestjs/common'
+import { Answer } from '../../enterprise/entities/answer'
 
 interface FetchQuestionAnswersUseCaseRequest {
   questionId: string

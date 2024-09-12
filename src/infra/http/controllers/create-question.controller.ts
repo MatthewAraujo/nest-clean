@@ -32,14 +32,8 @@ export class CreateQuestionController {
     body: CreateQuestionBodySchema,
     @CurrentUser() user: UserPayload,
   ) {
-<<<<<<< HEAD
     const { title, content, attachments } = body
-=======
-    console.log("oi")
-    const { title, content } = body
->>>>>>> main
     const userId = user.sub
-
 
     const result = await this.createQuestion.execute({
       title,
