@@ -13,7 +13,7 @@ import { ChooseQuestionBestAnswerUseCase } from '@/domain/forum/application/use-
 export class ChooseQuestionBestAnswerController {
   constructor(
     private chooseQuestionBestAnswer: ChooseQuestionBestAnswerUseCase,
-  ) {}
+  ) { }
 
   @Patch()
   @HttpCode(204)

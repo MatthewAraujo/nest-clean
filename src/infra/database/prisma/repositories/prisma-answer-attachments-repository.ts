@@ -26,6 +26,7 @@ export class PrismaAnswerAttachmentsRepository
       },
     })
   }
+
   async createMany(attachments: AnswerAttachment[]): Promise<void> {
     if (attachments.length === 0) {
       return

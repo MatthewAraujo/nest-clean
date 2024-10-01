@@ -16,7 +16,7 @@ import { FileInterceptor } from '@nestjs/platform-express'
 export class UploadAttachmentsController {
   constructor(
     private uploadAndCreateAttachment: UploadAndCreateAttachmentUseCase,
-  ) {}
+  ) { }
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))

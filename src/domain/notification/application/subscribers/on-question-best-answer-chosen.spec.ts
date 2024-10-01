@@ -3,18 +3,26 @@ import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository'
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
-import { SendNotificationUseCase } from '../use-cases/send-notification'
+import {
+  SendNotificationUseCase,
+  SendNotificationUseCaseRequest,
+  SendNotificationUseCaseResponse,
+} from '../use-cases/send-notification'
 import { InMemoryNotificationsRepository } from 'test/repositories/in-memory-notifications-repository'
 import { makeQuestion } from 'test/factories/make-question'
+import { MockInstance } from 'vitest'
 import { waitFor } from 'test/utils/wait-for'
 import { OnQuestionBestAnswerChosen } from '@/domain/notification/application/subscribers/on-question-best-answer-chosen'
-import { MockInstance } from 'vitest'
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
+import { InMemoryAttachmentsRepository } from 'test/repositories/in-memory-attachments-repository'
 
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let inMemoryNotificationsRepository: InMemoryNotificationsRepository
+let inMemoryStudentsRepository: InMemoryStudentsRepository
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository
 let sendNotificationUseCase: SendNotificationUseCase
 
 let sendNotificationExecuteSpy: MockInstance
@@ -23,8 +31,12 @@ describe('On Question Best Answer Chosen', () => {
   beforeEach(() => {
     inMemoryQuestionAttachmentsRepository =
       new InMemoryQuestionAttachmentsRepository()
+    inMemoryStudentsRepository = new InMemoryStudentsRepository()
+    inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository()
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionAttachmentsRepository,
+      inMemoryAttachmentsRepository,
+      inMemoryStudentsRepository,
     )
     inMemoryAnswerAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository()

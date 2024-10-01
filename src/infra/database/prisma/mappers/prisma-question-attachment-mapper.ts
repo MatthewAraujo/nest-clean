@@ -23,7 +23,6 @@ export class PrismaQuestionAttachmentMapper {
     const attachmentIds = attachments.map((attachment) => {
       return attachment.attachmentId.toString()
     })
-
     return {
       where: {
         id: {

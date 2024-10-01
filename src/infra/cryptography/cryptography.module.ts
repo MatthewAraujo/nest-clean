@@ -16,4 +16,4 @@ import { HasherCompare } from '@/domain/forum/application/cryptography/hasher-co
   ],
   exports: [Encrypter, HasherCompare, HasherGenerator],
 })
-export class CryptographyModule {}
+export class CryptographyModule { }
